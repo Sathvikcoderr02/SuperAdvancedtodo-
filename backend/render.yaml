@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: task-manager-api
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        fromDatabase:
+          name: taskmanagerdb
+          property:connectionString
+      - key: JWT_SECRET
+        generateValue: true
+        sync: false
+    plan: free
+
+databases:
+  - name: taskmanagerdb
+    databaseName: taskmanager
+    user: taskmanageruser
+    plan: free
