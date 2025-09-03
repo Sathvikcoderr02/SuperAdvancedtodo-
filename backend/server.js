@@ -7,9 +7,21 @@ const taskRoutes = require('./routes/tasks');
 
 const app = express();
 
-// CORS configuration for local development
+// CORS configuration
+const whitelist = [
+  'http://localhost:3000',
+  'https://super-advancedtodo.vercel.app',  // Your Vercel frontend URL
+  'https://*.vercel.app'  // Allow all Vercel preview URLs
+];
+
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With'],
   credentials: true
