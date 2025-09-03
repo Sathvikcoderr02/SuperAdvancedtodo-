@@ -10,7 +10,8 @@ const app = express();
 // CORS configuration
 const whitelist = [
   'http://localhost:3000',
-  'https://super-advancedtodo.vercel.app',  // Your Vercel frontend URL
+  'https://super-advancedtodo.vercel.app',
+  'https://super-advancedtodo-34l2.vercel.app',  // Your specific Vercel deployment URL
   'https://*.vercel.app'  // Allow all Vercel preview URLs
 ];
 
